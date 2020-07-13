@@ -1,0 +1,27 @@
+<h3>User: {{ name }}</h3>
+
+<form action="subscribe" method="POST">
+
+<table>
+	<tr>
+		<th>Channel</th>
+		<th>Subscribed</th>
+	<tr>
+
+{% for s in subscriptionsAll %}
+	<tr>
+		<td>
+			{{ s.name }}
+		</td>
+		<td>
+			<input type="checkbox" name="subscribed[]" value="{{ s.id }}"
+				{% if s.id in subscriptionsUser %} checked {% endif %} >
+		</td>			
+	<tr>
+{% endfor %}
+
+</table>
+
+<input type="submit" value=" Subscribe ">
+
+</form>
