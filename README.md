@@ -43,3 +43,4 @@ $subscription->save();
 
 Выйти из artisan: exit
 
+Доступ по URL: /listsubs

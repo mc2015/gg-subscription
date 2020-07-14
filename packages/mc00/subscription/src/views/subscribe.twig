@@ -14,8 +14,7 @@
 			{{ s.name }}
 		</td>
 		<td>
-			<input type="checkbox" name="subscribed[]" value="{{ s.id }}"
-				{% if s.id in subscriptionsUser %} checked {% endif %} >
+			<input type="checkbox" name="subscribed[]" value="{{ s.id }}" {% if s.id in subscriptionsUser %} checked {% endif %} >
 		</td>			
 	<tr>
 {% endfor %}
