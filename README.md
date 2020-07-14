@@ -23,23 +23,23 @@ php artisan tinker
 
 // Создать пользователя, если его нет:
 
-$user = new App\User();
-$user->password = Hash::make('1');
-$user->email = 'user@mail.ru';
-$user->name = 'Username';
-$user->save();
+    $user = new App\User();
+    $user->password = Hash::make('1');
+    $user->email = 'user@mail.ru';
+    $user->name = 'Username';
+    $user->save();
 
 // Создать каналы:
 
-$subscription = new App\Subscription();
-$subscription->name = 'channel1';
-$subscription->save();
-$subscription = new App\Subscription();
-$subscription->name = 'channel2';
-$subscription->save();
-$subscription = new App\Subscription();
-$subscription->name = 'channel3';
-$subscription->save();
+    $subscription = new App\Subscription();
+    $subscription->name = 'channel1';
+    $subscription->save();
+    $subscription = new App\Subscription();
+    $subscription->name = 'channel2';
+    $subscription->save();
+    $subscription = new App\Subscription();
+    $subscription->name = 'channel3';
+    $subscription->save();
 
 Выйти из artisan: exit
 
