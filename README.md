@@ -39,7 +39,7 @@ Laravel Package: подписка на каналы
 
     composer dump-autoload
 
-### Добавить в **config/app.php** в массив *providers* ссылку на сервис-провайдер
+### Добавить в *config/app.php* в массив *providers* ссылку на сервис-провайдер
 
     'providers' => [
 	    mc00\subscription\subscriptionServiceProvider::class,
@@ -49,7 +49,7 @@ Laravel Package: подписка на каналы
 
 Можно подписывать/отписывать пользователя.
 
-Доступ к функционалу по URL: /listsubs (или /public/listsubs) в зависимости от настроек.
+Доступ к функционалу по URL: сайт/listsubs (или сайт/public/listsubs) в зависимости от настроек.
 
 
 
