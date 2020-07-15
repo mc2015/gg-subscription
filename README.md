@@ -1,46 +1,57 @@
 Laravel Package: подписка на каналы
 ===================================
 
-Добавить в composer.json, в секцию autoload:
+Для отображения Twig шаблона использовался *rcrowe/TwigBridge:0.9.6*
+
+1. Скопировать содержимое в корень проекта laravel
+--------------------------------------------------
+
+Предполагается, что модель User существует и таблица users создана, что хотя бы один пользователь в системе существует.
+Если пользователь залогинен, будет использоваться он, если нет, то последний созданный (это тест).
+
+2. Добаивть функцию в модель пользователя App/User.php
+------------------------------------------------------
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany('App\Subscription');
+    }
+
+3. Запустить мигарции
+---------------------
+
+    php artisan migrate --path=/packages/mc00/subscription/src/migrations
+
+4. Запустить seeder (заполнить таблицу каналов, на которые подписывается пользователь)
+--------------------------------------------------------------------------------------
+
+    php artisan db:seed --class=SubscriptionSeeder
+
+5. Добавить в composer.json проекта в секцию autoload\psr-4 ссылку на mc00\subscription
+------------------------------------------------------------------------------------
 
     "autoload": {
-        "classmap": [
-        ],
         "psr-4": {
-           "mc00\\subscription\\": "packages/mc00/subscription/src"
-        }
-    },
+            "App\\": "app/",
+            "mc00\\subscription\\": "packages/mc00/subscription/src"        
+		}
+    }
 
-Для отображения Twig шаблона использовался *rcrowe/TwigBridge*
 
-Запуск миграций:
+Запустить
 
-php artisan migrate --path=/packages/mc00/subscription/src/migrations
+    composer dump-autoload
 
-Создание пользователя и заполнение таблицы каналов.
+6. Добавить в **config/app.php** ссылку на сервис-провайдер
+-----------------------------------------------------------
 
-php artisan tinker
+    mc00\subscription\subscriptionServiceProvider::class,
 
-// Создать пользователя, если его нет:
 
-    $user = new App\User();
-    $user->password = Hash::make('1');
-    $user->email = 'user@mail.ru';
-    $user->name = 'Username';
-    $user->save();
 
-// Создать каналы:
+Можно подписывать/отписывать пользователя.
 
-    $subscription = new App\Subscription();
-    $subscription->name = 'channel1';
-    $subscription->save();
-    $subscription = new App\Subscription();
-    $subscription->name = 'channel2';
-    $subscription->save();
-    $subscription = new App\Subscription();
-    $subscription->name = 'channel3';
-    $subscription->save();
+Доступ к функционалу по URL: /listsubs (или /public/listsubs) в зависимости от настроек.
 
-Выйти из artisan: exit
 
-Доступ по URL: /listsubs
+
